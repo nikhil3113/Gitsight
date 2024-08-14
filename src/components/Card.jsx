@@ -2,12 +2,13 @@ import { FiTwitter } from "react-icons/fi";
 import { MdOutlineEmail } from "react-icons/md";
 import { useRecoilValue } from "recoil";
 import { username, userProfileAtom } from "../store/atoms/user";
-import { FaGithub, FaBlog } from "react-icons/fa";
+import { FaGithub, FaBlog, FaTwitter } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const Profile = () => {
   const user = useRecoilValue(username);
   const userProfileValue = useRecoilValue(userProfileAtom);
+  // console.log(userProfileValue.twitter)
 
   return (
     <div className="flex flex-col justify-center items-center mt-5 mb-5">
@@ -52,13 +53,18 @@ const Profile = () => {
             </div>
 
             <div className="flex justify-evenly items-center text-black text-2xl">
-              {userProfileValue.twitter != null ? <FiTwitter /> : ""}
+              {userProfileValue.twitter != null ?  <Link
+                  to={`https://x.com/${userProfileValue.twitter}`}
+                  target="_blank"
+                >
+                  <FiTwitter />
+                </Link>: ""}
 
               {userProfileValue.email != null ? <MdOutlineEmail /> : ""}
 
               {userProfileValue.blog != null ? (
                 <Link
-                  to={userProfileValue.blog}
+                  to={`${userProfileValue.blog}`}
                   target="_blank"
                 >
                   <FaBlog />
